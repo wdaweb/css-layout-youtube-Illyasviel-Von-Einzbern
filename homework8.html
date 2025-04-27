@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+    <link rel="stylesheet" href="./css/animate.css" />
+    <link rel="stylesheet" href="./css/all.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      /* 抓瀏覽器高度 */
+
+      body {
+        font-family: "微軟正黑體", sans-serif;
+      }
+
+      .container {
+        width: 90%;
+        margin: auto;
+        margin: 0 0 0 160px;
+
+        /* background: black; */
+      }
+      /* 建立一個寬度一致且水平致中的容器，目的是讓每個區塊寬度一致 */
+
+      .h-100 {
+        height: 100% !important;
+        /* !important 讓優先權重最大/高 */
+        /* 優先權通常後蓋前，或是分數較高者 */
+      }
+
+      .h-150 {
+        height: 150% !important;
+      }
+      .h-200 {
+        height: 200% !important;
+      }
+      .h-25 {
+        height: 25% !important;
+      }
+      .h-10 {
+        height: 10% !important;
+      }
+
+      /* header */
+      #header {
+        width: 100%;
+        height: 56px;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        /* 與陰影類似 水平 垂直 模糊半徑 顏色 */
+        z-index: 1;
+
+        background: #000;
+      }
+      #header2 {
+        width: 80%;
+        height: 56px;
+        position: fixed;
+        left: 50%;
+        top: 5%;
+        transform: translate(-50%, 50%);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        z-index: 1;
+        ul {
+          /* background: #999; */
+          li {
+            /* background: #666; */
+            a {
+              width: 80px;
+              border-radius: 10%;
+              color: #fff;
+
+              background: #333;
+            }
+          }
+        }
+
+        background: #000;
+      }
+
+      #header .menu {
+        width: 100%;
+        height: 56px;
+        text-align: center;
+        /* background: url("../images/nav-bg-full.jpg") repeat-x center; */
+        font-size: 0;
+        /* 處理幽靈空白，因為 li 轉型 inline-block，會產生幽靈空白 */
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        /* .logo、.menu 都進入定位層，.menu 較晚出現會蓋住 .logo 
+  ，用 z-index: -1 將 .menu 往下移動，調整順位 */
+      }
+      #header2 .menu {
+        width: 100%;
+        height: 56px;
+        text-align: center;
+        font-size: 0;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+      }
+
+      #header .menu li {
+        display: inline-block;
+        padding: 1rem 0px;
+        font-size: 1rem;
+        /* 將字形大小設回 1rem */
+
+        /* float: left; */
+        width: 100px;
+
+        /* background: red; */
+      }
+      /* 將選單橫向排列 */
+      #header2 .menu li {
+        /* display: inline-block; */
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        float: left;
+
+        /* width: 100px; */
+
+        /* background: red; */
+      }
+
+      #header .menu a {
+        color: white;
+        text-decoration: none;
+        /* 把線去掉 */
+        display: block;
+        /* 轉型填滿父元素 li 的寬度 */
+        padding: 0.5rem 1.5rem;
+        transition: 0.5s;
+
+        /* background: green; */
+      }
+      #header2 .menu a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 0rem 0rem;
+        transition: 0.5s;
+
+        /* background: green; */
+      }
+
+      #header .menu a:hover {
+        background: rgba(255, 64, 64, 0.5);
+      }
+      #header2 .menu a:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      #header .menu li:nth-child(2) {
+        margin-right: 25%;
+      }
+      /* 放 logo 拓寬用 */
+      #header .menu li:nth-child(3) {
+        margin-right: 10%;
+      }
+      #header .menu li:nth-child(4) {
+        margin-right: 10%;
+      }
+
+      #header .menu li::before {
+        content: "";
+        /* 必須要有 content */
+        width: 12px;
+        height: 60px;
+        /* background: url("../images/nav-bg-left.png") no-repeat left top/cover; */
+        position: absolute;
+        /* 固定定位會自動轉型 block */
+        left: -10px;
+        top: 0;
+
+        /* background: red; */
+      }
+      #header .menu li::after {
+        content: "";
+        /* 必須要有 content */
+        width: 12px;
+        height: 60px;
+        /* background: url("../images/nav-bg-right.png") no-repeat right top/cover; */
+        position: absolute;
+        /* 固定定位會自動轉型 block */
+        right: -10px;
+        top: 0;
+
+        /* background: red; */
+      }
+      /* 使用偽元素來放置左、右兩側背景 */
+
+      #header .logo {
+        width: 15%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        /* background: red; */
+      }
+
+      #header .logo img {
+        width: 100%;
+      }
+
+      /* header */
+      /* middle */
+
+      #side {
+        position: relative;
+        width: 12.5%;
+        height: 150vh;
+        /* z-index: 1; */
+        /* top: 10%; */
+        margin: auto;
+        float: left;
+
+        /* background: pink; */
+        .sidebar {
+          /* float: left; */
+          position: relative;
+          top: 10%;
+          left: -100%;
+          width: 90%;
+          height: 50%;
+          /* width: calc(20% - 20px); */
+          /* calc 加減運算符號 符號前後要加空白 */
+          padding: 5%;
+          /* opacity: 0.7; */
+          overflow: hidden;
+
+          /* background-color: #aaa; */
+        }
+      }
+      #side .sidebar:hover {
+        overflow-y: scroll;
+
+        /* background: lightblue; */
+      }
+      #card {
+        /* background: url("") no-repeat center/cover; */
+        position: relative;
+        z-index: -1;
+
+        .container {
+          height: 100%;
+          position: relative;
+
+          /* background: gray; */
+          .row {
+            width: 100%;
+            /* height: 100%; */
+            position: relative;
+            top: 21.75%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0;
+
+            /* background: green; */
+
+            .col {
+              box-sizing: border-box;
+              /* 將 padding、border 都算在寬度(width)  */
+              color: #aaa;
+              display: inline-block;
+              padding: 1rem 1rem;
+              margin: 0 1% 0 1%;
+              width: 15%;
+              /* top: 15%; */
+              /* position: relative; */
+              font-size: 1rem;
+              vertical-align: middle;
+              /* vertical-align 只針對外在行為是 inline、inline-block 或 替換元素(img、input、iframe、...) */
+              /* 還可以用在td */
+              /* 不能用在block */
+
+              /* background: blue; */
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+
+                /* background: #808; */
+              }
+
+              h3 {
+                margin-bottom: 0.5rem;
+              }
+
+              p {
+                line-height: 1;
+                text-indent: 1.5rem;
+                letter-spacing: 2px;
+                margin-bottom: 0.5rem;
+              }
+
+              iframe {
+                width: 100%;
+                height: 300%;
+                border: 5px solid rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+              }
+            }
+          }
+        }
+      }
+
+      .card {
+        /* display: inline-block; */
+        border: 2px solid #000;
+      }
+
+      .author-picture {
+        width: 20px;
+        height: 20px;
+        float: left;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .author {
+        font-size: 16px;
+      }
+
+      .view {
+        font-size: 12px;
+      }
+
+      /* middle */
+
+      /* footer */
+      /* footer */
+    </style>
+  </head>
+  <body>
+    <!-- 到 YouTube 無痕視窗，設計版型 -->
+    <div id="header">
+      <div class="logo">
+        <a href="#card02"><img src="" alt="" title="" /></a>
+      </div>
+
+      <ul class="menu">
+        <li id="list">
+          <a href="#card01"><i class="fa-solid fa-bars"></i>選單</a>
+        </li>
+        <li>
+          <a href="#card02"><i class="fa-brands fa-youtube"></i>YT</a>
+        </li>
+        <li><input type="text" size="35" /></li>
+        <li>
+          <a href="#card03"><i class="fa-solid fa-magnifying-glass"></i>搜尋</a>
+        </li>
+        <li>
+          <a href="#card04"><i class="fa-solid fa-microphone"></i>語音</a>
+        </li>
+        <li>
+          <a href="#card05"><i class="fa-solid fa-plus"></i>建立</a>
+        </li>
+        <li>
+          <a href="#card06"><i class="fa-solid fa-bell"></i>通知</a>
+        </li>
+        <li><a href="#card07">帳戶</a></li>
+        <!-- <li><a href="#footer">尾</a></li> -->
+      </ul>
+    </div>
+
+    <div id="header2">
+      <ul class="menu">
+        <li><a href="#card01">全部</a></li>
+        <li><a href="#card02">新聞</a></li>
+        <li><a href="#card03">遊戲</a></li>
+        <li><a href="#card04">直播中</a></li>
+        <li><a href="#card05">音樂</a></li>
+        <li><a href="#card06">Podcast</a></li>
+        <li><a href="#card07">棒球</a></li>
+        <li><a href="#card08">籃球</a></li>
+        <li><a href="#card09">卡通</a></li>
+        <li><a href="#card10">觀光</a></li>
+        <li><a href="#card11">自然</a></li>
+        <li><a href="#card12">烹飪</a></li>
+        <li><a href="#card13">最新上傳</a></li>
+      </ul>
+    </div>
+
+    <div id="side">
+      <div class="sidebar">
+        <div class="row">
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-house"></i>首頁</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">Shorts</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-film"></i>訂閱內容</a>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <h3></h3>
+            <a href="#"
+              ><i class="fa-solid fa-clock-rotate-left"></i>觀看紀錄</a
+            >
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-list"></i>播放清單</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-circle-play"></i>你的影片</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-clock"></i>稍後觀看</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-thumbs-up"></i>喜歡的影片</a>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <h3>訂閱內容</h3>
+            <a href="#"></a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">1</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">2</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">3</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">4</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">5</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">6</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">7</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-chevron-down"></i>顯示更多</a>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <h3>探索</h3>
+            <a href="#"><i class="fa-solid fa-fire"></i>發燒影片</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-music"></i>音樂</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-clapperboard"></i>電影</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-tower-broadcast"></i>直播</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-gamepad"></i>遊戲</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-newspaper"></i>新聞</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-trophy"></i>體育</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-graduation-cap"></i>課程</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-podcast"></i>Podcast</a>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <h3>更多 YouTube 功能</h3>
+            <a href="#">YouTube Premium</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">YouTube 工作室</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">YouTube Music</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#">YouTube Kids</a>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-gear"></i>設定</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-flag"></i>檢舉紀錄</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"><i class="fa-solid fa-circle-question"></i>說明</a>
+          </div>
+          <div class="col">
+            <h3></h3>
+            <a href="#"
+              ><i class="fa-solid fa-circle-exclamation"></i>提供意見</a
+            >
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <a href="#">簡介</a>
+
+            <a href="#">媒體</a>
+
+            <a href="#">著作權</a>
+
+            <a href="#">與我們聯絡</a>
+
+            <a href="#">創作者</a>
+
+            <a href="#">廣告</a>
+
+            <a href="#">開發人員</a>
+          </div>
+          <div class="col">
+            <a href="#">條款</a>
+
+            <a href="#">隱私權</a>
+
+            <a href="#">政策與安全性</a>
+
+            <a href="#">YouTube 運作方式</a>
+
+            <a href="#">測試新功能</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="card" class="h-150">
+      <div class="container h-100">
+        <div class="row h-25">
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row h-25">
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row h-25">
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row h-25">
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+          <div class="col card">
+            <div>
+              <img src="./images/allstar/r01.png" />
+            </div>
+            <div>
+              <div class="author-picture">
+                <img src="./images/allstar/r01.png" />
+              </div>
+              <div>
+                <h3 class="title">標題</h3>
+                <p class="author">作者</p>
+                <p class="view">觀看次數 時間</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const listbtn = document.getElementById("list");
+      const sidebarDisplay = document.querySelector(".sidebar");
+      const sidebarDisplayStyle = getComputedStyle(sidebarDisplay);
+      listbtn.onclick = () => {
+        // console.log(sidebarDisplay.style.left);
+        // console.log(sidebarDisplayStyle.left);
+        if (sidebarDisplayStyle.left < "0px") {
+          // console.log("~");
+          sidebarDisplay.style.left = "0%";
+        } else if (sidebarDisplayStyle.left >= "0px") {
+          // console.log("~~");
+          sidebarDisplay.style.left = "-100%";
+        }
+      };
+    </script>
+  </body>
+</html>
